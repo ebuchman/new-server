@@ -50,6 +50,11 @@ echo "$SSHCONFIG" > /etc/ssh/sshd_config
 
 service ssh restart
 
+# set up the network time daemon
+if $NTP ; then 
+	apt-get install ntp
+fi
+
 echo "ENABLE FIREWALL ..."
 
 # set up firewall
