@@ -27,6 +27,7 @@ chmod 700 /home/$USER/.ssh
 # copy this dir into the users
 mkdir /home/$USER/new-server
 cp -r ./* /home/$USER/new-server/
+cp -r ./.git /home/$USER/new-server/
 chmod 700 /home/$USER/new-server
 
 # give him bash on ssh
