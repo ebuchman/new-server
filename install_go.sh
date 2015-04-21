@@ -6,8 +6,8 @@ then
 	exit 1
 fi
 
-sudo apt-get update -y
-sudo apt-get upgrade -y
+#sudo apt-get update -y
+#sudo apt-get upgrade -y
 
 # get dependencies
 sudo apt-get install -y make screen gcc git mercurial libc6-dev pkg-config libgmp-dev
@@ -24,4 +24,7 @@ cd /home/$USER
 cp /etc/skel/.bashrc .
 echo "export GOROOT=/home/$USER/go" >> /home/$USER/.bashrc
 echo "export GOPATH=/home/$USER/goApps" >> /home/$USER/.bashrc
+echo 'export PATH=$PATH:$GOROOT/bin' >> /home/$USER/.bashrc
 source /home/$USER/.bashrc
+
+cd /home/$USER/new-server

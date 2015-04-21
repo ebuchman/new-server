@@ -5,8 +5,8 @@
 # eg. http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers
 
 # assumes we logged in as root (ie. for the first time)
-apt-get update
-apt-get -y upgrade
+#apt-get update
+#apt-get -y upgrade
 
 # fail2ban for monitoring logins
 apt-get install -y fail2ban
@@ -23,6 +23,11 @@ useradd $USER
 mkdir /home/$USER
 mkdir /home/$USER/.ssh
 chmod 700 /home/$USER/.ssh
+
+# copy this dir into the users
+mkdir /home/$USER/new-server
+cp -r ./* /home/$USER/new-server/
+chmod 700 /home/$USER/new-server
 
 # give him bash on ssh
 chsh -s /bin/bash $USER
@@ -52,7 +57,7 @@ service ssh restart
 
 # set up the network time daemon
 if $NTP ; then 
-	apt-get install ntp
+	apt-get install -y ntp
 fi
 
 echo "ENABLE FIREWALL ..."
@@ -76,3 +81,5 @@ ufw enable
 apt-get install -y logwatch
 echo "/usr/sbin/logwatch --output mail --mailto $USEREMAIL --detail high" >> /etc/cron.daily/00logwatch
 
+echo "DONE HARDENING THE SERVER. SWITCHING OUT OF ROOT"
+su $USER
