@@ -22,6 +22,7 @@ cd go/src
 ./make.bash
 cd /home/$USER
 cp /etc/skel/.bashrc .
+cp /etc/skel/.profile .
 echo "export GOROOT=/home/$USER/go" >> /home/$USER/.bashrc
 echo "export GOPATH=/home/$USER/goApps" >> /home/$USER/.bashrc
 echo 'export PATH=$PATH:$GOROOT/bin' >> /home/$USER/.bashrc
