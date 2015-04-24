@@ -11,6 +11,9 @@
 # fail2ban for monitoring logins
 apt-get install -y fail2ban
 
+# debian doesn't come with sudo?
+apt-get install sudo
+
 # load the user info
 source info.sh
 # load the configs
@@ -64,10 +67,13 @@ fi
 echo "ENABLE FIREWALL ..."
 
 # set up firewall
+apt-get install ufw
+
 # white list ssh access 
 for ip in "${WHITELIST[@]}"; do
 	ufw allow from $ip to any port $SSHPORT
 done
+# if the whitelist is empty, open ssh port
 if [ ${#WHITELIST[@]} -eq 0 ]; then
 	ufw allow $SSHPORT
 fi
@@ -75,6 +81,15 @@ fi
 for port in "${OPENPORTS[@]}"; do
 	ufw allow $port
 done
+# open port ranges
+if [ ${#PORTRANGE_LOW[@]} != ${#PORTRANGE_HIGH[@]} ]; then
+	echo "length of PORTRANGE_LOW and PORTRANGE_HIGH must be equal!"
+	exit 1
+fi
+for ((i=0;i<${#PORTRANGE_LOW[@]};++i)); do
+	ufw allow ${PORTRANGE_LOW[i]}:${PORTRANGE_HIGH[i]}/tcp
+done
+
 # apply
 ufw enable
 
