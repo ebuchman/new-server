@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/bash -x 
+set -e
 
 # set up a fresh server with moderate security settings and some 
 # monitoring
@@ -18,7 +19,7 @@ source config.sh
 # Get the dependencies
 echo "GETTING DEPENDENCIES ..."
 for  dep in "${OPENPORTS[@]}"; do
-	apt-get install $dep
+	apt-get install -y $dep
 done
 
 # copy in the sudoers file
@@ -38,9 +39,13 @@ echo "$SSHCONFIG" > /etc/ssh/sshd_config
 service ssh restart
 
 # GET SERVICES
-
-for service in "$SERVICES[@]"; do
+for service in "${SERVICES[@]}"; do
 	apt-get install -y $service
+done
+
+# GET APP dependencies
+for app in "${APPS[@]}"; do
+	apt-get install -y $app
 done
 
 echo "ENABLE FIREWALL ..."
@@ -67,7 +72,7 @@ for ((i=0;i<${#PORTRANGE_LOW[@]};++i)); do
 done
 
 # apply
-ufw enable
+yes | ufw enable
 
 # watch the logs and have them emailed to me
 # TODO: investigate this further .. 

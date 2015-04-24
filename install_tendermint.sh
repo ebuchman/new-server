@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/bash -x
+set -e
 
 if [ `whoami` == "root" ];
 then
@@ -9,7 +10,7 @@ fi
 USER=`whoami`
 source /home/$USER/.bashrc
 rm -rf $GOPATH/src/github.com/tendermint/tendermint
-go get github.com/tendermint/tendermint
+go get github.com/tendermint/tendermint/cmd/tendermint
 
 cd $GOPATH/src/github.com/tendermint/tendermint
 git checkout develop

@@ -80,4 +80,7 @@ AcceptEnv LANG LC_*
 Subsystem sftp /usr/lib/openssh/sftp-server
 
 UsePAM yes
+
+# TODO: we want this but it prevents any ssh login ...
+# ForwardAgent no
 "

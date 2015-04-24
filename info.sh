@@ -5,6 +5,7 @@ UU=true
 
 # User's info
 USER=deploy
+PWD=balls
 USEREMAIL="deploy@hulabaloo.com"
 IDRSAPUB="ssh-rsa MYLONGPHATRSAKEY deploy@hulabaloo.com"
 SUDO=true

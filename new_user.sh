@@ -10,8 +10,6 @@
 
 # load the user info
 source info.sh
-# load the configs
-source config.sh
 
 echo "CREATE USER $USER ..."
 
@@ -22,16 +20,20 @@ mkdir /home/$USER/.ssh
 chmod 700 /home/$USER/.ssh
 
 # copy this dir into the users
-mkdir /home/$USER/new-server
-cp -r ./* /home/$USER/new-server/
-cp -r ./.git /home/$USER/new-server/
+mkdir -p /home/$USER/new-server
+cp -a ./* /home/$USER/new-server/
+cp -a ./.git /home/$USER/new-server/
 chmod 700 /home/$USER/new-server
+
+cp /etc/skel/.bashrc /home/$USER/
+cp /etc/skel/.profile /home/$USER/
 
 # give him bash on ssh
 chsh -s /bin/bash $USER
 
 
 # set user password
+# TODO: password in info.sh should be hashed
 if [ "$PWD" != "" ]; then
 	echo $USER:$PWD | chpasswd
 else
@@ -43,14 +45,10 @@ echo "AUTHORIZING USER's PUBKEY"
 echo $IDRSAPUB
 echo $IDRSAPUB >> /home/$USER/.ssh/authorized_keys
 chmod 400 /home/$USER/.ssh/authorized_keys
-chown $USER:$USER /home/$USER -R
+chown -R $USER:$USER /home/$USER
 
 if [ "$SUDO" = "true" ]; then
 	echo "GIVE $USER sudo PERMISSIONS ... "
 	echo "$USER	ALL=(ALL) ALL" >> /etc/sudoers
 fi
-
-
-
-
 
