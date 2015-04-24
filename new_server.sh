@@ -5,6 +5,9 @@ set -e
 # monitoring
 # eg. http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers
 
+# load the user info
+source info.sh
+
 # assumes we logged in as root (ie. for the first time)
 if [ "$UU" = "true" ]; then
 	apt-get update
@@ -18,8 +21,6 @@ else
 	echo $ROOTPWD | passwd	
 fi
 
-# load the user info
-source info.sh
 # load the configs
 source config.sh
 
