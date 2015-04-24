@@ -4,7 +4,6 @@ source info.sh
 
 SUDOERS="
 root    ALL=(ALL) ALL
-$USER ALL=(ALL) ALL
 "
 
 

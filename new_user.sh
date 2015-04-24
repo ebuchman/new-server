@@ -30,8 +30,8 @@ chmod 700 /home/$USER/new-server
 # give him bash on ssh
 chsh -s /bin/bash $USER
 
-echo "GIVE $USER sudo PERMISSIONS ... "
 
+# set user password
 if [ "$PWD" != "" ]; then
 	echo $USER:$PWD | chpasswd
 else
@@ -39,6 +39,18 @@ else
 fi
 
 # update authorized keys
+echo "AUTHORIZING USER's PUBKEY"
+echo $IDRSAPUB
 echo $IDRSAPUB >> /home/$USER/.ssh/authorized_keys
 chmod 400 /home/$USER/.ssh/authorized_keys
 chown $USER:$USER /home/$USER -R
+
+if [ "$SUDO" = "true" ]; then
+	echo "GIVE $USER sudo PERMISSIONS ... "
+	echo "$USER	ALL=(ALL) ALL" >> /etc/sudoers
+fi
+
+
+
+
+
