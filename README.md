@@ -34,6 +34,8 @@ And tendermint:
 
 `bash install_tendermint.sh`
 
-## Now run tendermint with 
+It would now be a good idea to log out and ssh back in with the new user.
+
+## You can run tendermint with 
 
 `bash mint`
