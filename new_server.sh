@@ -11,6 +11,9 @@
 # fail2ban for monitoring logins
 apt-get install -y fail2ban
 
+# debian doesn't come with sudo?
+apt-get install sudo
+
 # load the user info
 source info.sh
 # load the configs
@@ -64,6 +67,8 @@ fi
 echo "ENABLE FIREWALL ..."
 
 # set up firewall
+apt-get install ufw
+
 # white list ssh access 
 for ip in "${WHITELIST[@]}"; do
 	ufw allow from $ip to any port $SSHPORT
