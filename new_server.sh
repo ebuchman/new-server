@@ -11,6 +11,13 @@ if [ "$UU" = "true" ]; then
 	apt-get -y upgrade
 fi
 
+# deal with root pwd
+if [ "$ROOTPWD" = "disable" ]; then 
+	passwd -l root
+else 
+	echo $ROOTPWD | passwd	
+fi
+
 # load the user info
 source info.sh
 # load the configs
