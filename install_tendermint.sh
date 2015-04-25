@@ -8,7 +8,7 @@ then
 fi
 
 USER=`whoami`
-source /home/$USER/.bashrc
+source /home/$USER/.profile
 rm -rf $GOPATH/src/github.com/tendermint/tendermint
 go get github.com/tendermint/tendermint/cmd/tendermint
 

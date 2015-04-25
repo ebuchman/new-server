@@ -18,9 +18,9 @@ tar -xzvf go*.tar.gz
 cd go/src
 ./make.bash
 cd /home/$USER
-echo "export GOROOT=/home/$USER/go" >> /home/$USER/.bashrc
-echo "export GOPATH=/home/$USER/goApps" >> /home/$USER/.bashrc
-echo 'export PATH=$PATH:$GOROOT/bin' >> /home/$USER/.bashrc
-source /home/$USER/.bashrc
+echo "export GOROOT=/home/$USER/go" >> /home/$USER/.profile
+echo "export GOPATH=/home/$USER/goApps" >> /home/$USER/.profile
+echo 'export PATH=$PATH:$GOROOT/bin' >> /home/$USER/.profile
+source /home/$USER/.profile
 
 cd /home/$USER/new-server
